@@ -1,15 +1,24 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useRootStore} from '../modules/RootStore';
-
+import {useNavigation} from '@react-navigation/native';
 import {observer} from 'mobx-react';
+
+import {useRootStore} from '../modules/RootStore';
 import Person from '../modules/people/models/Person';
+import Routes from '../types/Routes';
 
 interface IMainListProps {}
 
 const Item = ({title}: {title: string}) => {
+  const navigation = useNavigation();
+
+  const handlePress = useCallback(
+    () => navigation.navigate(Routes.InfoScreen),
+    [navigation],
+  );
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={handlePress}>
       <View style={styles.item}>
         <Text style={styles.text}>{title}</Text>
       </View>

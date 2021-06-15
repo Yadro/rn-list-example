@@ -12,6 +12,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import MainList from './screens/MainList';
 import InfoScreen from './screens/InfoScreen';
+import Routes from './types/Routes';
 
 const Stack = createStackNavigator();
 
@@ -25,11 +26,15 @@ const App = () => {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Main">
             <Stack.Screen
-              name="Main"
+              name={Routes.Main}
               component={MainList}
               options={{title: 'People'}}
             />
-            <Stack.Screen name="InfoScreen" component={InfoScreen} />
+            <Stack.Screen
+              name={Routes.InfoScreen}
+              component={InfoScreen}
+              options={{title: 'Info Card'}}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
