@@ -1,5 +1,5 @@
 # RN list example
-It's list of people with filter by name and age.  
+It's a list of people with filters by name and age.
 
 Also, you can open the person and look at person info, like
 - Name
