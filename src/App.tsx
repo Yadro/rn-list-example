@@ -10,7 +10,7 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import MainListScreen from './screens/MainList/MainList';
+import MainListScreen from './screens/MainList/MainListScreen';
 import InfoScreen from './screens/InfoScreen';
 import Routes from './types/Routes';
 
