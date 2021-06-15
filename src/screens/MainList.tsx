@@ -7,24 +7,29 @@ import {useRootStore} from '../modules/RootStore';
 import Person from '../modules/people/models/Person';
 import Routes from '../types/Routes';
 
-interface IMainListProps {}
+interface IItem {
+  person: Person;
+}
 
-const Item = ({title}: {title: string}) => {
+const Item: React.FC<IItem> = props => {
+  const {person} = props;
   const navigation = useNavigation();
 
   const handlePress = useCallback(
-    () => navigation.navigate(Routes.InfoScreen),
-    [navigation],
+    () => navigation.navigate(Routes.InfoScreen, {person}),
+    [navigation, person],
   );
 
   return (
     <TouchableOpacity onPress={handlePress}>
       <View style={styles.item}>
-        <Text style={styles.text}>{title}</Text>
+        <Text style={styles.text}>{person.fullName}</Text>
       </View>
     </TouchableOpacity>
   );
 };
+
+interface IMainListProps {}
 
 const MainList: React.FC<IMainListProps> = observer(() => {
   const rootStore = useRootStore();
@@ -32,7 +37,7 @@ const MainList: React.FC<IMainListProps> = observer(() => {
   const {people} = personsStore;
 
   const renderItem = useCallback(
-    ({item}: {item: Person}) => <Item title={item.fullName || ''} />,
+    ({item}: {item: Person}) => <Item person={item} />,
     [],
   );
 
