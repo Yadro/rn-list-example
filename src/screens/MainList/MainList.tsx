@@ -1,11 +1,13 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {observer} from 'mobx-react';
 
-import {useRootStore} from '../modules/RootStore';
-import Person from '../modules/people/models/Person';
-import Routes from '../types/Routes';
+import {useRootStore} from '../../modules/RootStore';
+import Person from '../../modules/people/models/Person';
+import Routes from '../../types/Routes';
+import Filter from './Filter';
+import {EFilter} from '../../types/EFilter';
 
 interface IItem {
   person: Person;
@@ -36,6 +38,8 @@ const MainList: React.FC<IMainListProps> = observer(() => {
   const {personsStore} = rootStore;
   const {people} = personsStore;
 
+  const [active, setActive] = useState<EFilter>(EFilter.name);
+
   const renderItem = useCallback(
     ({item}: {item: Person}) => <Item person={item} />,
     [],
@@ -49,6 +53,7 @@ const MainList: React.FC<IMainListProps> = observer(() => {
 
   return (
     <View style={styles.root}>
+      <Filter active={active} onChange={setActive} />
       <FlatList
         data={people}
         renderItem={renderItem}
