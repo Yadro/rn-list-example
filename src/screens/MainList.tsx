@@ -1,17 +1,17 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useRootStore} from './modules/RootStore';
+import {useRootStore} from '../modules/RootStore';
 
 import {observer} from 'mobx-react';
-import Person from './modules/people/models/Person';
+import Person from '../modules/people/models/Person';
 
 interface IMainListProps {}
 
 const Item = ({title}: {title: string}) => {
   return (
     <TouchableOpacity>
-      <View>
-        <Text>{title}</Text>
+      <View style={styles.item}>
+        <Text style={styles.text}>{title}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -27,23 +27,35 @@ const MainList: React.FC<IMainListProps> = observer(() => {
     [],
   );
 
+  const keyExtractor = useCallback(item => item.id?.toString() || '', []);
+
   useEffect(() => {
     personsStore.getCharacters();
   }, [personsStore]);
 
   return (
-    <View>
+    <View style={styles.root}>
       <FlatList
         data={people}
         renderItem={renderItem}
-        keyExtractor={item => item.id?.toString() || ''}
+        keyExtractor={keyExtractor}
       />
     </View>
   );
 });
 
 const styles = StyleSheet.create({
-  root: {},
+  root: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  item: {
+    padding: 16,
+  },
+  text: {
+    fontSize: 18,
+    lineHeight: 24,
+  },
 });
 
 export default MainList;
