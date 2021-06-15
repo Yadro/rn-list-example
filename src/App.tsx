@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  useColorScheme,
-  View,
-  StyleSheet,
-} from 'react-native';
+import {SafeAreaView, StatusBar, View, StyleSheet} from 'react-native';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -17,11 +11,9 @@ import Routes from './types/Routes';
 const Stack = createStackNavigator();
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
     <SafeAreaView style={styles.root}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar barStyle="light-content" backgroundColor="black" />
       <View style={styles.container}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Main">
