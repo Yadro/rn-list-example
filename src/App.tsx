@@ -20,7 +20,12 @@ const App = () => {
             <Stack.Screen
               name={Routes.Main}
               component={MainListScreen}
-              options={{title: 'People'}}
+              options={{
+                title: 'People',
+                headerStyle: {
+                  elevation: 0,
+                },
+              }}
             />
             <Stack.Screen
               name={Routes.InfoScreen}
