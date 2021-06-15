@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {EFilter, FilterStr} from '../../types/EFilter';
+import {EFilter, FilterStr} from '../../../types/EFilter';
 
 interface IFilterProps {
   active: EFilter;

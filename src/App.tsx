@@ -10,7 +10,7 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import MainList from './screens/MainList/MainList';
+import MainListScreen from './screens/MainList/MainList';
 import InfoScreen from './screens/InfoScreen';
 import Routes from './types/Routes';
 
@@ -27,7 +27,7 @@ const App = () => {
           <Stack.Navigator initialRouteName="Main">
             <Stack.Screen
               name={Routes.Main}
-              component={MainList}
+              component={MainListScreen}
               options={{title: 'People'}}
             />
             <Stack.Screen

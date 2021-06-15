@@ -6,7 +6,7 @@ import {observer} from 'mobx-react';
 import {useRootStore} from '../../modules/RootStore';
 import Person from '../../modules/people/models/Person';
 import Routes from '../../types/Routes';
-import Filter from './Filter';
+import Filter from './components/Filter';
 import {EFilter} from '../../types/EFilter';
 
 interface IItem {
@@ -33,7 +33,7 @@ const Item: React.FC<IItem> = props => {
 
 interface IMainListProps {}
 
-const MainList: React.FC<IMainListProps> = observer(() => {
+const MainListScreen: React.FC<IMainListProps> = observer(() => {
   const rootStore = useRootStore();
   const {personsStore} = rootStore;
   const {people} = personsStore;
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainList;
+export default MainListScreen;
