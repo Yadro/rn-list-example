@@ -7,15 +7,15 @@ import Person from '../../modules/people/models/Person';
 import Filter from './components/Filter';
 import {EFilter} from '../../types/EFilter';
 import PersonItem from './components/PersonItem';
+import {computed} from 'mobx';
 
 interface IMainListProps {}
 
 const MainListScreen: React.FC<IMainListProps> = observer(() => {
   const rootStore = useRootStore();
   const {personsStore} = rootStore;
-  const {people} = personsStore;
 
-  const [active, setActive] = useState<EFilter>(EFilter.name);
+  const [activeFilter, setActiveFilter] = useState<EFilter>(EFilter.name);
 
   const renderItem = useCallback(
     ({item}: {item: Person}) => <PersonItem person={item} />,
@@ -24,15 +24,19 @@ const MainListScreen: React.FC<IMainListProps> = observer(() => {
 
   const keyExtractor = useCallback(item => item.id?.toString() || '', []);
 
+  const persons = computed(() =>
+    personsStore.getCharacters(activeFilter),
+  ).get();
+
   useEffect(() => {
-    personsStore.getCharacters();
+    personsStore.fetchCharacters();
   }, [personsStore]);
 
   return (
     <View style={styles.root}>
-      <Filter active={active} onChange={setActive} />
+      <Filter active={activeFilter} onChange={setActiveFilter} />
       <FlatList
-        data={people}
+        data={persons}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
       />

@@ -1,5 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {observer} from 'mobx-react';
+
 import {EFilter, FilterStr} from '../../../types/EFilter';
 
 interface IFilterProps {
@@ -7,7 +9,7 @@ interface IFilterProps {
   onChange: (filter: EFilter) => void;
 }
 
-const Filter: React.FC<IFilterProps> = props => {
+const Filter: React.FC<IFilterProps> = observer(props => {
   const {active, onChange} = props;
 
   return (
@@ -23,10 +25,11 @@ const Filter: React.FC<IFilterProps> = props => {
       ))}
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   root: {
+    margin: 4,
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
